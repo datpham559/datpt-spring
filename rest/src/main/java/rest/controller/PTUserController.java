@@ -35,8 +35,8 @@ public class PTUserController {
 
     }
 
-    @GetMapping(value = "/student")
-    public List<PTUser> getStudent() {
+    @GetMapping(value = "/ptuser/get-all")
+    public List<PTUser> getAllUser() {
         return ptUserService.findAll();
     }
 
@@ -51,8 +51,9 @@ public class PTUserController {
         return ptUserService.updateStudent(PTUser);
     }
 
-    @GetMapping(value = "/student/{id}")
-    public PTUser findStudentbyId(@PathVariable Integer id) {
-        return null;
+    @GetMapping(value = "/ptuser/{id}")
+    public ResponseEntity<PTUser> findStudentbyId(@PathVariable Long id) {
+        PTUser ptUser = ptUserService.findById(id);
+        return ResponseEntity.ok().body(ptUser);
     }
 }

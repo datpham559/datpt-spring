@@ -24,7 +24,6 @@ public class PTUser {
 
     @Column(name="password")
     @NotEmpty(message = "Password không được để trống!")
-    @Min(value = 6, message = "Password phải từ 6 kí tự trở lên!")
     private String password;
 
     @Column(name="dateofbirth")
