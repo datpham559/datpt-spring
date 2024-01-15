@@ -19,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 public class JwtFilter extends OncePerRequestFilter {
     @Autowired
@@ -29,6 +30,9 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
+//            if (isAllowApi(request)){
+//                return;
+//            }
             String jwt = getJwtFromRequest(request);
             if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)){
                 String username = jwtTokenProvider.getUserNameJwtToken(jwt);
@@ -54,4 +58,9 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         return null;
     }
+//    private Boolean isAllowApi(HttpServletRequest request){
+//        List<String> apis = List.of("/api/tool");
+//        String uri = request.getRequestURI();
+//        return apis.stream().anyMatch(uri::startsWith);
+//    }
 }
